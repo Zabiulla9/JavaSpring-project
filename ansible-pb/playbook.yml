@@ -1,0 +1,23 @@
+---
+-
+  become: true
+  hosts: all
+  name: "Installing Java, Jenkins and Docker"
+  tasks:
+    -
+      apt_repository: "repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present"
+      name: "download jenkins.repo"
+    -
+      apt: "name={{item}} update_cache=yes state=latest"
+      name: "Install Java"
+      with_items:
+        - openjdk-8-jre-headless
+        - docker.io
+        - jenkins
+        - maven
+    -
+      action: "service name=jenkins state=restarted"
+      name: "start Jenkins"
+    -
+      action: "service name=docker state=restarted"
+      name: "Start Docker"
