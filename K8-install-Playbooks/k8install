@@ -1,0 +1,44 @@
+--- 
+- 
+  become: true
+  hosts: all
+  name: "K8 installation"
+  tasks: 
+    - 
+      name: "check if kubernetes is installed"
+      register: admin_conf
+      stat: path=/etc/kubernetes/admin.conf
+    - 
+      apt_key: 
+        state: present
+        url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    - 
+      apt_repository: 
+        repo: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+        state: present
+      when: "not admin_conf.stat.exists"
+    - 
+      apt: "name={{item}} update_cache=yes state=present"
+      name: "Installing PCKG"
+      when: "not admin_conf.stat.exists"
+      with_items: 
+        - kubelet
+        - kubeadm
+        - kubectl
+        - kubernetes-cni
+        - docker.io
+    - 
+      name: "start kubelet"
+      service: 
+        enabled: true
+        name: kubelet
+        state: started
+- 
+  become: true
+  hosts: all
+  name: "Restarting machine"
+  tasks: 
+    - 
+      name: "Reboot All Machines"
+      reboot: ~
+
