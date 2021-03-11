@@ -1,0 +1,53 @@
+--- 
+apiVersion: v1
+kind: ReplicationController
+metadata: 
+  name: spring-controller
+spec: 
+  replicas: 3
+  selector: 
+    app: springboot
+  template: 
+    metadata: 
+      labels: 
+        app: springboot
+    spec: 
+      containers: 
+        - 
+          env: 
+            - 
+              name: MONGO_DB_HOSTNAME
+              value: mongo
+            - 
+              name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom: 
+                configMapKeyRef: 
+                  key: mongo-root-username
+                  name: springapp-configmap
+            - 
+              name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                configMapKeyRef: 
+                  key: mongo-root-password
+                  name: springapp-configmap
+          image: harshaettigi/spring-boot-mongo
+          name: springboot
+          ports: 
+            - 
+              containerPort: 8080
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+  name: springboot-service
+spec: 
+  ports: 
+    - 
+      nodePort: 30000
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector: 
+    app: springboot
+  type: NodePort
+
