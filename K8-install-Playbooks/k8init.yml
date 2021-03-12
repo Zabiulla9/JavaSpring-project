@@ -1,8 +1,8 @@
-- hosts: masters
+- hosts: master
   become: yes
   tasks:
     - name: initialize K8S cluster
-      shell: kubeadm init --pod-network-cidr=172.16.0.0/16 
+      shell: kubeadm init --pod-network-cidr=10.244.0.0/16 
 
     - name: create .kube directory
       file:
@@ -13,15 +13,15 @@
     - name: copy admin.conf to user's kube config
       copy:
         src: /etc/kubernetes/admin.conf
-        dest: /root/.kube/config
+        dest: $HOME/.kube/config
         remote_src: yes
+
+    - name: chown command
+      shell: chown $(id -u):$(id -g) $HOME/.kube/config
 
     - name: install Pod network
       become: yes
-      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml >> pod_network_setup.txt
+      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml >> pod_network_setup.txt
       args:
         chdir: $HOME
         creates: pod_network_setup.txt
-    - 
-      command: "hostnamectl set-hostname master-node"
-      name: "Setting name"

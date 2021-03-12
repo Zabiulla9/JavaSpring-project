@@ -2,7 +2,7 @@
 - 
   become: true
   gather_facts: false
-  hosts: Master
+  hosts: master
   name: "Provisioning Worker node"
   tasks: 
     - 
@@ -15,7 +15,7 @@
         join_command: "{{ join_command_raw.stdout_lines[0] }}"
 - 
   become: true
-  hosts: Worker
+  hosts: worker
   name: "Joining worker nodes"
   tasks: 
     - 
@@ -23,8 +23,8 @@
         chdir: $HOME
         creates: node_joined.txt
       name: "join cluster"
-      shell: "{{ hostvars['3.20.240.173'].join_command }} --ignore-preflight-errors all  >> node_joined.txt"
+      shell: "{{ hostvars['18.224.190.230'].join_command }} --ignore-preflight-errors all  >> node_joined.txt"
 
-    - kubectl set-hostname worker-node"
-      name: "Setting name"
-
+    -
+      name: Setting name
+      shell: hostnamectl set-hostname worker
