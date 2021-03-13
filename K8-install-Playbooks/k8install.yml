@@ -36,7 +36,11 @@
     -
       name: "Hold Packages"
       command: apt-mark hold kubeadm kubelet kubectl
-
+-
+  become: true
+  hosts: master
+  name: "Setting host name"
+  tasks:
     -
       command: "hostnamectl set-hostname master-node"
       name: "Setting name"
