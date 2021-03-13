@@ -1,9 +1,13 @@
 ---
 -
   become: true
-  hosts: all
+  hosts: jenkins
   name: "Installing Java, Jenkins and Docker"
   tasks:
+    -
+      apt_key:
+        state: present
+        url: "https://pkg.jenkins.io/debian-stable/jenkins.io.key"
     -
       apt_repository: "repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present"
       name: "download jenkins.repo"
