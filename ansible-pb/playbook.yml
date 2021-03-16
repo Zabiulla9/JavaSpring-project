@@ -11,6 +11,11 @@
     -
       apt_repository: "repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present"
       name: "download jenkins.repo"
+      
+    -
+      shell: apt-get update
+      name: "Apt update"
+      
     -
       apt: "name={{item}} update_cache=yes state=present"
       name: "Install Java"
