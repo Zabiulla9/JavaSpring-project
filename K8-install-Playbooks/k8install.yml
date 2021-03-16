@@ -1,7 +1,7 @@
 --- 
 - 
   become: true
-  hosts: all
+  hosts: multi
   name: "K8 installation"
   tasks: 
     - 
@@ -44,9 +44,17 @@
     -
       command: "hostnamectl set-hostname master-node"
       name: "Setting name"
+-
+  become: true
+  hosts: worker
+  name: "Setting host name"
+  tasks:
+    -
+      command: "hostnamectl set-hostname Worker-node"
+      name: "Setting name"
 - 
   become: true
-  hosts: all
+  hosts: multi
   name: "Restarting machine"
   tasks: 
     - 
