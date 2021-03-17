@@ -1,0 +1,16 @@
+[jenkins]
+
+<IP address of Jenkins ec2> ansible_user='ubuntu' ansible_ssh_private_key_file='/etc/ansible/<pem-key>'
+
+[master]
+
+<IP address of k8-master ec2> ansible_user='ubuntu' ansible_ssh_private_key_file='/etc/ansible/<pem-key>'
+
+[worker]
+
+<IP address of k8-worker ec2> ansible_user='ubuntu' ansible_ssh_private_key_file='/etc/ansible/<pem-key>'
+
+[multi]
+
+<IP address of k8-master ec2> ansible_user='ubuntu' ansible_ssh_private_key_file='/etc/ansible/<pem-key>'
+<IP address of k8-worker ec2> ansible_user='ubuntu' ansible_ssh_private_key_file='/etc/ansible/<pem-key>'
