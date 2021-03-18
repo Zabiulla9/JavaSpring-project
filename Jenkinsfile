@@ -1,11 +1,11 @@
   node{
     env.PATH = "/usr/share/maven/bin/:$PATH"   //installed path in linux machine
     stage('git-clone') {
-        sh 'git clone https://github.com/Harshaettigi/Spring-webpage.git'
+        sh 'https://github.com/Zabiulla9/JavaSpring-project.git'
     }
         
     stage('mvn') {
-        sh ''' cd /var/lib/jenkins/workspace/java-proj/Spring-webpage/      
+        sh ''' cd /var/lib/jenkins/workspace/java-proj/JavaSpring-project/Spring-webpage/      
         mvn clean package '''      //chdir where pom.xml is saved
     }
     

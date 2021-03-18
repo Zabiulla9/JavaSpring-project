@@ -18,8 +18,8 @@ resource "aws_instance" "git_jenk_dock" {
   }
 }
 
-data "template_file" "ansi" {
-  template = file("./ansi.sh")
+data "template_file" "AnsibleUserdata" {
+  template = file("./AnsibleUserdata.sh")
 }
 
 resource "aws_instance" "ansible" {
@@ -28,7 +28,7 @@ resource "aws_instance" "ansible" {
   subnet_id     = var.sb_pvt
   vpc_security_group_ids = [var.sg_ans]
   key_name      = "Zabiulla"
-  user_data  = data.template_file.ansi.rendered
+  user_data  = data.template_file.AnsibleUserdata.rendered
 
   tags = {
     Name = "Ansible"
