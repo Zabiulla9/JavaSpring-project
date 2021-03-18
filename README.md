@@ -1,5 +1,5 @@
 # Terraform-project
-This project covers DevOps tools like:
+This project covers DevOps tools i.e,:
 * Terraform for AWS infrastructure
 * Git to store repositories
 * Ansible playbooks to install packages
