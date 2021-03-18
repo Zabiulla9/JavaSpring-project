@@ -10,7 +10,10 @@ This project covers DevOps tools i.e,:
 steps: Create an ec2 install and install terraform and aws cli
 * Change to terraform dir
 * Copy/Save your pem key file
-* Create an ec2 install and install terraform and aws cli
+* Create an ec2 instance, install terraform and aws cli
+* Create an IAM user in AWS
+* Paste Access Key and Secret access key of IAM user in Terraform dir/main.tf file
+* Initialize Terraform; terraform init
 * Perform Terraform plan; terraform plan
 * Apply terraform code; terraform apply --auto-approve
 
