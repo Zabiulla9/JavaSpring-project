@@ -5,11 +5,11 @@ cd /home/ubuntu/terra
 sudo apt-get update
 sudo apt install zip -y
 sudo apt install tree -y
-sudo wget https://releases.hashicorp.com/terraform/0.14.8/terraform_0.14.8_linux_amd64.zip
-sudo unzip terraform_0.14.8_linux_amd64.zip
+sudo wget https://releases.hashicorp.com/terraform/1.0.7/terraform_1.0.7_linux_amd64.zip
+sudo unzip terraform_1.0.7_linux_amd64.zip
 sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 sudo unzip awscliv2.zip
 sudo ./aws/install
 
 # add this path to your PATH env variable  to access terraform from anywhere
-#  PATH=$PATH:/home/ubuntu/terra/
+PATH=$PATH:/home/ubuntu/terra/
